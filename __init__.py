@@ -46,59 +46,57 @@ FLATPAGES_HTML_RENDERER = render_markdown
 FLATPAGES_ROOT = os.path.join(os.getcwd(), 'pages')
 
 
-app = Flask(
-    __name__,
-    static_folder=os.path.join(ROOT, 'static'),
-    template_folder=os.path.join(ROOT, 'templates')
-)
-app.config.from_object(__name__)
-pages = FlatPages(app)
+class Site(object):
 
+    def __init__(self, name):
+        self.title = name
 
-@app.route('/')
-def index():
-    return render_template('index.html', pages=pages)
+        app = Flask(
+            __name__,
+            static_folder=os.path.join(ROOT, 'static'),
+            template_folder=os.path.join(ROOT, 'templates')
+        )
+        self.app = app
+        app.config.from_object(__name__)
+        pages = FlatPages(app)
 
+        @app.route('/')
+        def index():
+            return render_template('index.html', pages=pages, title=self.title)
 
-@app.route('/<path:path>.html')
-def page(path):
-    page = pages.get_or_404(path)
-    return render_template('page.html', page=page)
+        @app.route('/<path:path>.html')
+        def page(path):
+            page = pages.get_or_404(path)
+            return render_template('page.html', page=page)
 
+        def page_to_dict(page):
+            from copy import copy
+            d = copy(page.meta)
+            d['body'] = page.body
+            d['route'] = page.path + '.html'
+            return d
 
-def page_to_dict(page):
-    from copy import copy
-    d = copy(page.meta)
-    d['body'] = page.body
-    d['route'] = page.path + '.html'
-    return d
+        @app.route('/whole.json')
+        def whole():
+            import json
+            from datetime import date
+            return json.dumps(
+                [page_to_dict(page) for page in pages],
+                default=lambda o: str(o) if isinstance(o, date) else None
+            ), 200, {'Content-Type': 'application/json'}
 
+        @app.route('/search.html')
+        def search():
+            return render_template('search.html')
 
-@app.route('/whole.json')
-def whole():
-    import json
-    from datetime import date
-    return json.dumps(
-        [page_to_dict(page) for page in pages],
-        default=lambda o: str(o) if isinstance(o, date) else None
-    ), 200, {'Content-Type': 'application/json'}
+        @app.route('/style.css')
+        def style():
+            return sass.compile(app), 200, {'Content-Type': 'text/css'}
 
+    def build(self, output_path='build'):
+        self.app.config['OUTPUT_PATH'] = output_path
+        freezer = Freezer(app)
+        freezer.freeze()
 
-@app.route('/search.html')
-def search():
-    return render_template('search.html')
-
-
-@app.route('/style.css')
-def style():
-    return sass.compile(app), 200, {'Content-Type': 'text/css'}
-
-
-def build(output_path='build'):
-    app.config['OUTPUT_PATH'] = output_path
-    freezer = Freezer(app)
-    freezer.freeze()
-
-
-def run(port=8000):
-    app.run(port=port)
+    def run(self, port=8000):
+        self.app.run(port=port)
