@@ -1,0 +1,30 @@
+@mixin nav($accent, $base2) {
+    #nav {
+        z-index: 90;
+        position: fixed;
+        left: 0;
+        margin-top: 3em;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-indent: 1em;
+        border-right: 1px solid $accent;
+        ul {
+            margin: 1em;
+            li {
+                z-index: 100;
+                font-size: 2em;
+                margin-top: 0.1em;
+                text-align: right;
+                a {
+                    text-decoration: underline;
+                    &, &:visited {
+                        color: $accent;
+                    };
+                    &:hover {
+                        color: $base2;
+                    }
+                }
+            }
+        }
+    }
+}

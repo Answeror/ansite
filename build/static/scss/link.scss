@@ -1,0 +1,16 @@
+@import "color";
+
+article.post {
+  a {
+    outline: none;
+    text-decoration: none;
+    &:link {
+      border-bottom-width: 1px;
+      border-bottom-style: dotted;
+    }
+    &:hover {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+  }
+}

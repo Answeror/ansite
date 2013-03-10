@@ -95,7 +95,7 @@ class Site(object):
 
     def build(self, output_path='build'):
         self.app.config['OUTPUT_PATH'] = output_path
-        freezer = Freezer(app)
+        freezer = Freezer(self.app)
         freezer.freeze()
 
     def run(self, port=8000):
