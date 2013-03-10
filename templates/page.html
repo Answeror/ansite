@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import post_date %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block head %}
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            "tex2jax": { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            MMLorHTML: { prefer: { Firefox: "HTML" } }
+        });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+{% endblock head %}
+
+{% block content %}
+    <!--<h1><a href="{{ url_for('index') }}">Index</a></h1>-->
+    <article class="post">
+        <header>
+            <h1>{{ page.title }}</h1>
+            <h2>{{ post_date(page) }}</h2>
+        </header>
+        <section class="content">
+            {{ page.html|safe }}
+        </section>
+    </article>
+{% endblock content %}

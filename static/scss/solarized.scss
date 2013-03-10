@@ -1,0 +1,23 @@
+@import "color";
+
+html * {
+    color-profile: sRGB;
+    rendering-intent: auto;
+}
+
+/* Based on kate's own default colors for Haskell */
+pre.sourceCode, table.sourceCode, table.sourceCode * { font-family: monospace; }
+code.sourceCode span.kw { color: $yellow; font-weight: bold; }
+code.sourceCode span.dt { color: $cyan; }
+code.sourceCode span.dv { color: $base01; }
+code.sourceCode span.bn { color: $orange; }
+code.sourceCode span.fl { color: $cyan; }
+code.sourceCode span.ch { color: $red; }
+code.sourceCode span.st { color: $magenta; }
+code.sourceCode span.co { color: $base01; font-style: italic; }
+code.sourceCode span.ot { }
+code.sourceCode span.al { color: $green; font-weight: bold; }
+code.sourceCode span.fu { color: $blue; }
+code.sourceCode span.re { }
+code.sourceCode span.er { color: $red; font-weight: bold; }
+

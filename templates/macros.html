@@ -1,0 +1,5 @@
+{%- macro post_date(p) %}
+  {%- with d = p.date %}
+  <time class="post-date" datetime="{{ d }}">{{ d.strftime('%Y-%m-%d') }}</time>
+  {%- endwith %}
+{%- endmacro %}

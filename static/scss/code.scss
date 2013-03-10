@@ -1,0 +1,27 @@
+@import "code-style";
+
+@mixin inline_code($border, $background) {
+    pre, code, kbd {
+        font-family: monospace, sans-serif;
+    }
+    code, kbd {
+        background-color: $background;
+        padding: 1px 3px 1px 3px;
+        -moz-border-radius: 0.2em;
+        -webkit-border-radius: 0.2em;
+    }
+}
+
+kbd {
+    padding: 0 0.2em;
+    border-width: 1px;
+    border-style: solid;
+    -moz-border-radius: 0.2em;
+    -webkit-border-radius: 0.2em;
+}
+
+.codehilite pre {
+    white-space:pre-wrap;
+    padding:1em;
+    line-height: 1em;
+}

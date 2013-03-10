@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>SEARCH</h1>
+        </header>
+        <input type='text' id='query' autocomplete='off' placeholder='type regular expression with logical operator (AND, OR, NOT) and parenthesis here'>
+    </article>
+{% endblock content %}
+
+{% block footer %}
+    <script src='/static/js/search.js'></script>
+{% endblock footer %}

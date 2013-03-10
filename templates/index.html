@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import post_date %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>HELANIC ABYSS</h1>
+        </header>
+        <ul class='toc'>
+            <li>
+                <h1><a href='http://www.answeror.com'>OLD BLOG</a></h1>
+            </li>
+        </ul>
+        <hr>
+        <ol class='toc'>
+            {% for page in pages | sort(attribute='date', reverse=True) %}
+            <li>
+                <h1><a href='{{ url_for('page', path=page.path) }}'>{{ page.title }}</a></h1>
+                <p>{{ post_date(page) }}</p>
+            </li>
+            {% else %}
+            <li>No stuff.</li>
+            {% endfor %}
+        </ol>
+    </article>
+{% endblock content %}
