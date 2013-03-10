@@ -93,8 +93,8 @@ class Site(object):
         def style():
             return sass.compile(app), 200, {'Content-Type': 'text/css'}
 
-    def build(self, output_path='build'):
-        self.app.config['OUTPUT_PATH'] = output_path
+    def build(self, output_path=os.path.join(os.getcwd(), 'build')):
+        self.app.config['FREEZER_DESTINATION'] = output_path
         freezer = Freezer(self.app)
         freezer.freeze()
 
