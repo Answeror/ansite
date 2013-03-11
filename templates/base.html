@@ -2,10 +2,11 @@
 <html class='dark'>
     <head>
         <meta charset='utf-8'>
-        <title>{% block title %}Helanic Abyss{% endblock title %}</title>
+        <title>{% block title %}{{ title }}{% endblock title %}</title>
         <link rel='stylesheet' type='text/css' href='http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css'>
         <link rel='stylesheet' type='text/css' href='./style.css'>
         <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+        <script src='/static/js/layout.js'></script>
         {% block head %}
         {% endblock head %}
     </head>
