@@ -7,10 +7,10 @@ a {
 @import "link";
 @import "nav";
 @import "toc";
+@import "width";
 
 body {
-    width: 90%;
-    max-width: 60em;
+    @include width();
     font-size: 100%;
     font-family: georgia,times,serif;
     margin: 2em auto;
@@ -24,8 +24,10 @@ img.border {
 }
 
 #container {
-    margin: 5em;
     padding: 0;
+    & > article > *:first-child {
+        margin-top: (42 + 30)px;
+    }
 }
 
 ::selection {

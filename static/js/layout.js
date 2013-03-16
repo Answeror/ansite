@@ -11,13 +11,13 @@ if (!String.prototype.format) {
   };
 }
 
-$(function() {
-    var resizebody = function() {
-        $('body').css(
-            'width',
-            '{0}px'.format($('html').width() - 2 * $('#nav').width())
-        );
-    };
-    resizebody();
-    $(window).bind('resize', resizebody);
-});
+//$(function() {
+    //var resizebody = function() {
+        //$('body').css(
+            //'width',
+            //'{0}px'.format($('html').width() - 2 * $('#nav').width())
+        //);
+    //};
+    //resizebody();
+    //$(window).bind('resize', resizebody);
+//});

@@ -30,6 +30,7 @@
     }
     @include inline_code($rebase01, $rebase02);
     @include search();
+    @include nav($base2, $rebase03);
 }
 
 @mixin accentize($accent, $base0, $base1, $base2) {
@@ -48,7 +49,6 @@
             color: $accent;
         };
     }
-    @include nav($accent, $base2);
     @include post($accent);
 }
 
