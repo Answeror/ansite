@@ -1,26 +1,36 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import post_date %}
+{% from 'macros.html' import post_date, changelog %}
 
 {% block title %}{{ page.title }}{% endblock title %}
 
 {% block head %}
-    <script type="text/x-mathjax-config">
+    <script type='text/x-mathjax-config'>
         MathJax.Hub.Config({
-            "tex2jax": { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-            TeX: { equationNumbers: { autoNumber: "AMS" } },
-            MMLorHTML: { prefer: { Firefox: "HTML" } }
+            'tex2jax': { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            TeX: { equationNumbers: { autoNumber: 'AMS' } },
+            MMLorHTML: { prefer: { Firefox: 'HTML' } }
         });
     </script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML'></script>
 {% endblock head %}
 
 {% block content %}
-    <!--<h1><a href="{{ url_for('index') }}">Index</a></h1>-->
-    <article class="post">
+    <article class='post'>
         <header>
             <h1>{{ page.title }}</h1>
             <h2>{{ post_date(page) }}</h2>
         </header>
+        <section class='changelog'>
+            <h1>{{ changelog(page.meta.get('lang', 'zh')) }}</h1>
+            <table>
+                {% for d in hist %}
+                    <tr>
+                        <td class='time'><time datetime="{{ d.time }}"><accent>{{ d.time.strftime('%Y-%m-%d %H:%M') }}</accent></time></td>
+                        <td>{{ d.message }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </section>
         <section class="content">
             {{ page.html|safe }}
         </section>

@@ -1,48 +1,89 @@
+@import "color";
+@import "changelog";
+
+@mixin h($n) {
+    h#{$n} {
+        font-size: (2.4 - 0.3 * $n)em;
+        font-weight: normal;
+        line-height: 100%;
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+        a.headerlink {
+            display: none;
+        }
+        &:hover a.headerlink {
+            margin-left: 0.5em;
+            border-bottom: none;
+            text-decoration: none;
+            display: inline;
+        }
+    }
+}
+
 @mixin post($accent) {
     .post {
-        line-height: 1.5em;
+        section.content {
+            line-height: 1.5em;
 
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            /* http://themes.elmastudio.de/kerikeri-dark/2012/02/12/image-post-with-image-border/ */
-            padding: 5px;
-            background: #2A2F31;
-            border: 1px solid #13171A;
-        }
+            @for $i from 1 through 4 {
+                @include h($i);
+            }
 
-        blockquote {
-            padding-left: 2em;
-            font-style: italic;
-        }
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                /* http://themes.elmastudio.de/kerikeri-dark/2012/02/12/image-post-with-image-border/ */
+                padding: 5px;
+                background: #2A2F31;
+                border: 1px solid #13171A;
+            }
 
-        /* http://www.red-team-design.com/css3-ordered-list-styles */
-        /* http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/ */
-        ol {
-            counter-reset: li;
-            list-style: decimal;
-            li {
-                position:relative; /* Create a positioning context */
-                margin-left: 1em;
-                &:before {
-                    content:counter(li)"."; /* Use the counter as content */
-                    counter-increment:li; /* Increment the counter by 1 */
-                    margin-right: 1em;
-                }
-                &:hover:before {
-                    color: $accent;
+            blockquote {
+                padding-left: 2em;
+                font-style: italic;
+            }
+
+            /* http://www.red-team-design.com/css3-ordered-list-styles */
+            /* http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/ */
+            ol {
+                counter-reset: li;
+                list-style: decimal;
+                li {
+                    position:relative; /* Create a positioning context */
+                    margin-left: 1em;
+                    &:before {
+                        content:counter(li)"."; /* Use the counter as content */
+                        counter-increment:li; /* Increment the counter by 1 */
+                        margin-right: 1em;
+                    }
+                    &:hover:before {
+                        color: $accent;
+                    }
                 }
             }
-        }
 
-        p, pre, blockquote, table, ul, ol, dl {
-            margin: 1em 0;
-        }
+            p, pre, blockquote, table, ul, ol, dl {
+                margin: 1em 0;
+            }
 
-        strong {
-            font-weight: bold;
-            color: $accent;
+            strong {
+                font-weight: bold;
+                color: $accent;
+            }
+        }
+        section.changelog {
+            @include h(1);
+            line-height: 1.3em;
+            border-bottom: 1px dashed $green;
+            margin-bottom: 3em;
+            table {
+                td.time {
+                    width: 10em;
+                    vertical-align: top;
+                }
+                margin-bottom: 1.5em;
+            }
         }
     }
 }

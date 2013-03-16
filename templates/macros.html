@@ -3,3 +3,7 @@
   <time class="post-date" datetime="{{ d }}">{{ d.strftime('%Y-%m-%d') }}</time>
   {%- endwith %}
 {%- endmacro %}
+
+{%- macro changelog(lang) %}
+    {{ '更新历史' if lang == 'zh' else 'Changelog' }}
+{%- endmacro %}

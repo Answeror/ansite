@@ -1,47 +1,5 @@
 @import "color";
 
-@mixin h($n) {
-    h#{$n} {
-        font-weight: normal;
-        margin-top: 1.5em;
-        margin-bottom: 1em;
-        a.headerlink {
-            display: none;
-        }
-        &:hover a.headerlink {
-            margin-left: 0.5em;
-            border-bottom: none;
-            text-decoration: none;
-            display: inline;
-        }
-    }
-}
-
-.content {
-    @for $i from 1 through 6 {
-        @include h($i);
-    }
-
-    h1 {
-        font-size: 2.1em;
-    }
-    h2 {
-        font-size: 1.8em;
-    }
-    h3 {
-        font-size: 1.6em;
-    }
-    h4 {
-        font-size: 1.4em;
-    }
-    h5 {
-        font-size: 1.2em;
-    }
-    h6 {
-        font-size: 1.1em;
-    }
-}
-
 #container {
     header {
         text-align: center;

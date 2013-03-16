@@ -46,7 +46,20 @@ FLATPAGES_HTML_RENDERER = render_markdown
 FLATPAGES_ROOT = os.path.join(os.getcwd(), 'pages')
 
 
+class Hist(object):
+
+    def __init__(self, commit):
+        from datetime import datetime
+        self.time = datetime.fromtimestamp(commit.committed_date)
+        self.message = commit.message
+
+
 class Site(object):
+
+    def make_hist(self, page):
+        path = os.path.join(FLATPAGES_ROOT, page.path + '.md')
+        return [Hist(self.repo.rev_parse(c)) for c in
+                self.git.log('--pretty=%H', '--follow', '--', path).split('\n')]
 
     def __init__(self, name):
         self.title = name
@@ -60,6 +73,10 @@ class Site(object):
         app.config.from_object(__name__)
         pages = FlatPages(app)
 
+        import git
+        self.git = git.Git(os.getcwd())
+        self.repo = git.Repo(os.getcwd())
+
         @app.route('/')
         def index():
             return render_template('index.html', pages=pages, title=self.title)
@@ -67,7 +84,7 @@ class Site(object):
         @app.route('/<path:path>.html')
         def page(path):
             page = pages.get_or_404(path)
-            return render_template('page.html', page=page)
+            return render_template('page.html', page=page, hist=self.make_hist(page))
 
         def page_to_dict(page):
             from copy import copy

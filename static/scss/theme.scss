@@ -33,6 +33,9 @@
 }
 
 @mixin accentize($accent, $base0, $base1, $base2) {
+    accent {
+        color: $accent;
+    }
     a {
         border-color: $accent;
     }
