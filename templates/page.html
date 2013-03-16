@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import post_date, changelog %}
+{% from 'macros.html' import post_date, changelog_header %}
 
 {% block title %}{{ page.title }}{% endblock title %}
 
@@ -21,7 +21,7 @@
             <h2>{{ post_date(page) }}</h2>
         </header>
         <section class='changelog'>
-            <h1>{{ changelog(page.meta.get('lang', 'zh')) }}</h1>
+            {{ changelog_header(page.meta.get("lang", "zh")) }}
             <table>
                 {% for d in hist %}
                     <tr>
