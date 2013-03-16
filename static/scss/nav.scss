@@ -33,7 +33,7 @@
                         &, &:visited {
                             color: $yellow;
                         };
-                        &:hover {
+                        &:hover, &.current {
                             color: $base2;
                         }
                     }
