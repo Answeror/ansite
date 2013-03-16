@@ -22,7 +22,7 @@ def render_markdown(text):
     from header import CutheadExtension
     extensions.append(CutheadExtension({}))
 
-    extensions.append('fenced_code')
+    extensions.extend(['fenced_code', 'def_list'])
 
     import mdx_mathjax as mathjax
     extensions.append(mathjax.makeExtension())

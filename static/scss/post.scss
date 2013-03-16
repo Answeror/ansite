@@ -62,6 +62,20 @@
                     }
                 }
             }
+            ul {
+                list-style: circle;
+                li {
+                    position: relative;
+                    margin-left: 1em;
+                    &:before {
+                        content: "\22C5";
+                        margin-right: 1em;
+                    }
+                    &:hover:before {
+                        color: $accent;
+                    }
+                }
+            }
 
             p, pre, blockquote, table, ul, ol, dl {
                 margin: 1em 0;
@@ -70,6 +84,16 @@
             strong {
                 font-weight: bold;
                 color: $accent;
+            }
+            dl {
+                dt {
+                    clear: both;
+                    float: left;
+                    width: 10em;
+                    strong:after {
+                        content: ":";
+                    }
+                }
             }
         }
         section.changelog {
