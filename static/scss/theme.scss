@@ -33,7 +33,7 @@
     @include nav($base2, $rebase03);
 }
 
-@mixin accentize($accent, $base0, $base1, $base2) {
+@mixin accentize($accent, $base03, $base0, $base1, $base2) {
     accent {
         color: $accent;
     }
@@ -49,7 +49,7 @@
             color: $accent;
         };
     }
-    @include post($accent);
+    @include post($accent, $base03);
 }
 
 .light {
@@ -58,5 +58,5 @@
 
 .dark {
     @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3);
-    @include accentize($yellow, $base0, $base1, $base2);
+    @include accentize($yellow, $base03, $base0, $base1, $base2);
 }

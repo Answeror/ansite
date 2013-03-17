@@ -1,7 +1,7 @@
 @import "color";
 @import "changelog";
 
-@mixin h($n) {
+@mixin h($n, $background) {
     h#{$n} {
         font-size: (2.4 - 0.3 * $n)em;
         font-weight: normal;
@@ -17,16 +17,38 @@
             text-decoration: none;
             display: inline;
         }
+        &:hover {
+            position: relative;
+        }
+        /*modified from http://css-tricks.com/css-content/*/
+        &[tooltips]:hover:after {
+            content: attr(tooltips);
+            font-size: (1 / (2.4 - 0.3 * $n))em;
+            height: 100%;
+            color: $accent;
+            top: -1px;
+            right: 102%;
+            padding: 0 1em 0 1em;
+            vertical-align: center;
+            position: absolute;
+            white-space: nowrap; 
+            z-index: 20px;
+            border: 1px dashed $green;
+            -moz-border-radius: 5px; 
+            -webkit-border-radius: 5px;  
+            border-radius: 5px;  
+            background-color: $background;
+        }
     }
 }
 
-@mixin post($accent) {
+@mixin post($accent, $background) {
     .post {
         section.content {
             line-height: 1.5em;
 
             @for $i from 1 through 4 {
-                @include h($i);
+                @include h($i, $background);
             }
 
             img {
@@ -97,7 +119,7 @@
             }
         }
         section.changelog {
-            @include h(1);
+            @include h(1, $background);
             line-height: 1.3em;
             border-bottom: 1px dashed $green;
             margin-bottom: 3em;

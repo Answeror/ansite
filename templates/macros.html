@@ -5,7 +5,7 @@
 {%- endmacro %}
 
 {%- macro changelog_header(lang) %}
-    <h1 title="{{ '从Git提交历史中抽取得到' if lang == 'zh' else 'extracted from Git commits' }}">{{ '更新历史' if lang == 'zh' else 'Changelog' }}</h1>
+    <h1 tooltips="{{ '从Git提交历史中抽取得到' if lang == 'zh' else 'extracted from Git commits' }}">{{ '更新历史' if lang == 'zh' else 'Changelog' }}</h1>
 {%- endmacro %}
 
 {%- macro changelog_title(lang) %}
