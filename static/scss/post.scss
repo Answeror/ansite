@@ -32,12 +32,29 @@
             vertical-align: center;
             position: absolute;
             white-space: nowrap; 
-            z-index: 20px;
+            z-index: 20;
             border: 1px dashed $green;
             -moz-border-radius: 5px; 
             -webkit-border-radius: 5px;  
             border-radius: 5px;  
             background-color: $background;
+        }
+        &[tooltips]:hover:before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            right: 102%;
+            top: 50%;
+            position: absolute;
+            z-index: 21;
+            border-top: 1px dashed $green;
+            border-right: 1px dashed $green;
+            background-color: $background;
+            transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4);
+            -ms-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* IE 9 */
+            -webkit-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* Safari and Chrome */
+            -o-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* Opera */
+            -moz-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* Firefox */
         }
     }
 }
