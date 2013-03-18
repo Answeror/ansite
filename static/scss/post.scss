@@ -23,13 +23,13 @@
         /*modified from http://css-tricks.com/css-content/*/
         &[tooltips]:hover:after {
             content: attr(tooltips);
-            font-size: (1 / (2.4 - 0.3 * $n))em;
+            font-size: 12px;
             height: 100%;
             color: $accent;
             top: -1px;
-            right: 102%;
+            right: 100%;
+            margin-right: 10px;
             padding: 0 1em 0 1em;
-            vertical-align: center;
             position: absolute;
             white-space: nowrap; 
             z-index: 20;
@@ -41,20 +41,21 @@
         }
         &[tooltips]:hover:before {
             content: "";
-            width: 7px;
-            height: 7px;
-            right: 102%;
+            width: 9px;
+            height: 9px;
+            right: 100%;
+            margin-right: 10px;
             top: 50%;
             position: absolute;
             z-index: 21;
             border-top: 1px dashed $green;
             border-right: 1px dashed $green;
             background-color: $background;
-            transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4);
-            -ms-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* IE 9 */
-            -webkit-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* Safari and Chrome */
-            -o-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* Opera */
-            -moz-transform: matrix(0.707, 0.707, -0.707, 0.707, 4, -4); /* Firefox */
+            transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5);
+            -ms-transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5); /* IE 9 */
+            -webkit-transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5); /* Safari and Chrome */
+            -o-transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5); /* Opera */
+            -moz-transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5); /* Firefox */
         }
     }
 }
