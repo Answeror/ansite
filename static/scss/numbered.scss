@@ -1,0 +1,46 @@
+.numbered {
+    counter-reset: section;
+    h1 {
+        counter-reset: sub-section;
+        position: relative;
+        &:before {
+            counter-increment: section;
+            content: counter(section) ".";
+            position: absolute;
+            right: 100%;
+            margin-right: 20px;
+        }
+    }
+    h2 {
+        counter-reset: composite;
+        position: relative;
+        &:before {
+            counter-increment: sub-section;
+            content: counter(section) "." counter(sub-section) ".";
+            position: absolute;
+            right: 100%;
+            margin-right: 20px;
+        }
+    }
+    h3 {
+        counter-reset: detail;
+        position: relative;
+        &:before {
+            counter-increment: composite;
+            content: counter(section) "." counter(sub-section) "." counter(composite) ".";
+            position: absolute;
+            right: 100%;
+            margin-right: 20px;
+        }
+    }
+    h4 {
+        position: relative;
+        &:before{
+            counter-increment: detail;
+            content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ".";
+            position: absolute;
+            right: 100%;
+            margin-right: 20px;
+        }
+    }
+}

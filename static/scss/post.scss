@@ -60,13 +60,13 @@
     }
 }
 
-@mixin post($accent, $background) {
+@mixin post($accent, $base03, $base02, $base01, $base00, $base0, $base1, $base2, $base3) {
     .post {
         section.content {
             line-height: 1.5em;
 
             @for $i from 1 through 4 {
-                @include h($i, $background);
+                @include h($i, $base03);
             }
 
             img {
@@ -91,11 +91,13 @@
                 list-style: decimal;
                 li {
                     position:relative; /* Create a positioning context */
-                    margin-left: 1em;
+                    margin-left: 1.5em;
                     &:before {
-                        content:counter(li)"."; /* Use the counter as content */
-                        counter-increment:li; /* Increment the counter by 1 */
-                        margin-right: 1em;
+                        content: counter(li) "."; /* Use the counter as content */
+                        counter-increment: li; /* Increment the counter by 1 */
+                        position: absolute;
+                        left: -1.5em;
+                        z-index: 20;
                     }
                     &:hover:before {
                         color: $accent;
@@ -106,10 +108,12 @@
                 list-style: circle;
                 li {
                     position: relative;
-                    margin-left: 1em;
+                    margin-left: 1.5em;
                     &:before {
                         content: "\22C5";
-                        margin-right: 1em;
+                        position: absolute;
+                        left: -1.5em;
+                        z-index: 20;
                     }
                     &:hover:before {
                         color: $accent;
@@ -127,17 +131,49 @@
             }
             dl {
                 dt {
-                    clear: both;
                     float: left;
-                    width: 10em;
-                    strong:after {
+                    clear: left;
+                    max-width: 7em;
+                    &:after {
                         content: ":";
+                    }
+                }
+                dd {
+                    float: right;
+                    width: 43em;
+                }
+                /*http://css-tricks.com/snippets/css/clear-fix/*/
+                &:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+            }
+            table {
+                margin-left: auto;
+                margin-right: auto;
+                min-width: 70%;
+                border-collapse: collapse;
+                text-align: left;
+                th {
+                    border-bottom: 2px solid $base01;
+                    padding: 10px 8px;
+                    font-weight: bold;
+                }
+                tbody {
+                    td {
+                        border-bottom: 1px solid $base01;
+                        padding: 6px 8px;
+                        color: inherit;
+                    }
+                    tr:hover {
+                        color: $accent;
                     }
                 }
             }
         }
         section.changelog {
-            @include h(1, $background);
+            @include h(1, $base03);
             line-height: 1.3em;
             border-bottom: 1px dashed $green;
             margin-bottom: 3em;

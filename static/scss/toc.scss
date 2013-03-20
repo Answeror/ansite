@@ -1,13 +1,6 @@
-.toc li {
-    margin: 1em 0 1em 0;
-    h1 {
-        font-size: 1.3em;
-        margin: 0;
-        a {
-            text-decoration: none;
-        }
-    }
-    p {
-        margin: 0;
-    }
+.toc {
+    position: fixed;
+    z-index: 10;
+    left: 100px;
+    top: 41px;
 }

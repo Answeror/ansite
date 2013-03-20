@@ -3,6 +3,8 @@
 @import "code";
 @import "nav";
 @import "search";
+@import "index";
+@import "numbered";
 
 @mixin rebase($rebase03,$rebase02,$rebase01,$rebase00,$rebase0,$rebase1,$rebase2,$rebase3) {
     background-color: $rebase03;
@@ -49,7 +51,7 @@
             color: $accent;
         };
     }
-    @include post($accent, $base03);
+    @include post($accent, $base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3);
 }
 
 .light {

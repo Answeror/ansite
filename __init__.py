@@ -7,7 +7,6 @@ from flask.ext.flatpages import FlatPages
 from flask_frozen import Freezer
 import sass
 import markdown
-import glob
 import os
 
 
@@ -27,7 +26,39 @@ def render_markdown(text):
     import mdx_mathjax as mathjax
     extensions.append(mathjax.makeExtension())
 
-    return markdown.markdown(text, extensions)
+    return markdown.markdown(render_jinja2(text), extensions)
+
+
+def render_jinja2(text):
+    from jinja2 import Environment
+    env = Environment(extensions=[ShpamlExtension])
+    return env.from_string(text).render()
+
+
+from jinja2.ext import Extension
+
+
+class ShpamlExtension(Extension):
+
+    tags = set(['shpaml'])
+
+    def __init__(self, env):
+        super(ShpamlExtension, self).__init__(env)
+
+    def parse(self, parser):
+        from jinja2 import nodes
+        lineno = parser.stream.next().lineno
+        body = parser.parse_statements(['name:endshpaml'], drop_needle=True)
+        return nodes.CallBlock(
+            self.call_method('_shpaml', []),
+            [],
+            [],
+            body
+        ).set_lineno(lineno)
+
+    def _shpaml(self, caller):
+        from shpaml import convert_text
+        return convert_text(caller())
 
 
 ROOT = os.path.dirname(__file__)

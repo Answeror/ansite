@@ -30,3 +30,10 @@ $(function() {
         }
     });
 });
+
+//$(function() {
+    //var toc = $('.toc');
+    //$('.content').find('h1, h2, h3, h4').each(function(i, e) {
+        //$('<' + e.tagName + '/>').text($(e).text()).appendTo(toc);
+    //});
+//});
