@@ -61,6 +61,9 @@
 }
 
 @mixin post($accent, $base03, $base02, $base01, $base00, $base0, $base1, $base2, $base3) {
+    .wide {
+        width: 100%;
+    }
     .post {
         section.content {
             line-height: 1.5em;
@@ -150,6 +153,9 @@
                 }
             }
             table {
+                * {
+                    color: inherit;
+                }
                 margin-left: auto;
                 margin-right: auto;
                 min-width: 70%;
@@ -168,6 +174,11 @@
                     }
                     tr:hover {
                         color: $accent;
+                    }
+                }
+                &.top {
+                    td {
+                        vertical-align: top;
                     }
                 }
             }
