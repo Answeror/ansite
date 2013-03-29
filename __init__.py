@@ -118,10 +118,9 @@ class Site(object):
             # trigger frozen-flask
             if page.meta.get('json', False):
                 url_for('page_json', path=path)
-                url_for('page_jsonp', path=path)
             kargs = { 'page': page }
             if 'hole' in page.meta:
-                kargs['html'] = self._load_html(page.meta['hole'])
+                kargs['html'] = self._load_post_html(page.meta['hole'])
             else:
                 kargs['hist'] = self.make_hist(page)
             return render_template('page.html', **kargs)
@@ -161,10 +160,15 @@ class Site(object):
 
     def _load_page(self, hole):
         import json
-        return json.loads(self._load_remote('http://%s.page' % hole))
+        return json.loads(self._load_remote('http://%s.json' % hole))
 
     def _load_html(self, hole):
         return self._load_remote('http://%s.html' % hole).decode('utf-8')
+
+    def _load_post_html(self, hole):
+        from pyquery import PyQuery as pq
+        d = pq(self._load_html(hole))
+        return d('.post').html()
 
     def _fill_hole(self, page):
         if 'hole' in page.meta:
