@@ -133,6 +133,14 @@ class Site(object):
                 default=lambda o: str(o) if isinstance(o, date) else None
             ), 200, {'Content-Type': 'application/json'}
 
+        @app.route('/<path:path>.json')
+        def page_json(path):
+            import json
+            from datetime import date
+            return json.dumps([{
+                'html': 'a'
+            }]), 200, {'Content-Type': 'application/json'}
+
         @app.route('/search.html')
         def search():
             return render_template('search.html')
