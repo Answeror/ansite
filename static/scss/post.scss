@@ -33,7 +33,7 @@
             position: absolute;
             white-space: nowrap; 
             z-index: 20;
-            border: 1px dashed $green;
+            border: 1px solid $green;
             -moz-border-radius: 5px; 
             -webkit-border-radius: 5px;  
             border-radius: 5px;  
@@ -48,8 +48,8 @@
             top: 50%;
             position: absolute;
             z-index: 21;
-            border-top: 1px dashed $green;
-            border-right: 1px dashed $green;
+            border-top: 1px solid $green;
+            border-right: 1px solid $green;
             background-color: $background;
             transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5);
             -ms-transform: matrix(0.707, 0.707, -0.707, 0.707, 5, -5); /* IE 9 */
