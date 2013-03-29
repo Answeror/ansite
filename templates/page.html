@@ -16,25 +16,29 @@
 
 {% block content %}
     <article class='post'>
-        <header>
-            <h1>{{ page.title }}</h1>
-            <h2>{{ post_date(page) }}</h2>
-        </header>
-        <section class='toc numbered'>
-        </section>
-        <section class='changelog'>
-            {{ changelog_header(page.meta.get("lang", "zh")) }}
-            <table>
-                {% for d in hist %}
-                    <tr>
-                        <td class='time'><time datetime="{{ d.time }}"><accent>{{ d.time.strftime('%Y-%m-%d %H:%M') }}</accent></time></td>
-                        <td>{{ d.message }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </section>
-        <section class="content numbered">
-            {{ page.html|safe }}
-        </section>
+        {% if not html %}
+            <header>
+                <h1>{{ page.title }}</h1>
+                <h2>{{ post_date(page) }}</h2>
+            </header>
+            <section class='toc numbered'>
+            </section>
+            <section class='changelog'>
+                {{ changelog_header(page.meta.get("lang", "zh")) }}
+                <table>
+                    {% for d in hist %}
+                        <tr>
+                            <td class='time'><time datetime="{{ d.time }}"><accent>{{ d.time.strftime('%Y-%m-%d %H:%M') }}</accent></time></td>
+                            <td>{{ d.message }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </section>
+            <section class="content numbered">
+                {{ page.html|safe }}
+            </section>
+        {% else %}
+            {{ html|safe }}
+        {% endif %}
     </article>
 {% endblock content %}

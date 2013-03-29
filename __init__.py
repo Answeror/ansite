@@ -119,22 +119,12 @@ class Site(object):
             if page.meta.get('json', False):
                 url_for('page_json', path=path)
                 url_for('page_jsonp', path=path)
+            kargs = { 'page': page }
             if 'hole' in page.meta:
-                url = 'http://%s.jsonp' % page.meta['hole']
-                import textwrap
-                page.body = textwrap.dedent('''\
-                    <script type='text/javascript'>
-                    $(function() {
-                        $.jsonp({
-                            url: '%s',
-                            callback: 'callback',
-                            success: function(json) {
-                                $('.post').html($(json).find('.post').html());
-                            }
-                        });
-                    });
-                    </script>''' % url);
-            return render_template('page.html', page=page, hist=self.make_hist(page))
+                kargs['html'] = self._load_html(page.meta['hole'])
+            else:
+                kargs['hist'] = self.make_hist(page)
+            return render_template('page.html', **kargs)
 
         @app.route('/whole.json')
         def whole():
@@ -144,24 +134,6 @@ class Site(object):
                 [self._page_to_dict(self._fill_hole(page)) for page in pages],
                 default=lambda o: str(o) if isinstance(o, date) else None
             ), 200, {'Content-Type': 'application/json'}
-
-        @app.route('/<path:path>.jsonp')
-        def page_jsonp(path):
-            import json
-            from datetime import date
-            page = pages.get_or_404(path)
-            if not page.meta.get('json', False):
-                abort(404)
-            html = render_template(
-                'page.html',
-                page=page,
-                hist=self.make_hist(page)
-            )
-            return (
-                'callback(%s)' % json.dumps(html),
-                200,
-                {'Content-Type': 'application/json'}
-            )
 
         @app.route('/<path:path>.json')
         def page_json(path):
@@ -183,13 +155,20 @@ class Site(object):
         def style():
             return sass.compile(app), 200, {'Content-Type': 'text/css'}
 
+    def _load_remote(self, url):
+        import urllib2
+        return urllib2.urlopen(url).read()
+
+    def _load_page(self, hole):
+        import json
+        return json.loads(self._load_remote('http://%s.page' % hole))
+
+    def _load_html(self, hole):
+        return self._load_remote('http://%s.html' % hole).decode('utf-8')
+
     def _fill_hole(self, page):
         if 'hole' in page.meta:
-            url = 'http://%s.json' % page.meta['hole']
-            import urllib2
-            import json
-            text = urllib2.urlopen(url).read()
-            page.body = json.loads(text)['body']
+            page.body = self._load_page(page.meta['hole'])['body']
         return page
 
     def _page_to_dict(self, page):
