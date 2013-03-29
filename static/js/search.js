@@ -163,19 +163,19 @@ $(function() {
     };
 
     $.ans = new Object();
-    $('<ul/>').addClass('toc').appendTo('article');
+    $('<ol/>').addClass('index').appendTo('article');
     $.getJSON('/whole.json', function(data) {
         $.ans.whole = data;
         $('#query').keypress(function(e) {
             if (e.which == 13) {
                 var query = $('#query').val();
                 var tree = parse(query);
-                var ul = $('article > ul');
-                ul.empty();
+                var ol = $('article > ol');
+                ol.empty();
                 if (tree) {
                     $.each($.ans.whole, function(index, post) {
                         if (tree.apply(function(re) { return re.test(post.title) || re.test(post.body) })) {
-                            ul.append(
+                            ol.append(
                                 $('<li/>').append($('<h1/>').append($('<a/>', {
                                     'text': post.title,
                                     'href': post.route

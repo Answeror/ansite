@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, url_for
 from flask.ext.flatpages import FlatPages
 from flask_frozen import Freezer
 import sass
@@ -115,6 +115,10 @@ class Site(object):
         @app.route('/<path:path>.html')
         def page(path):
             page = pages.get_or_404(path)
+            # trigger frozen-flask
+            if page.meta.get('json', False):
+                url_for('page_json', path=path)
+                url_for('page_jsonp', path=path)
             if 'hole' in page.meta:
                 url = 'http://%s.jsonp' % page.meta['hole']
                 import textwrap
@@ -185,7 +189,7 @@ class Site(object):
             import urllib2
             import json
             text = urllib2.urlopen(url).read()
-            page.body = json.loads(text[len('callback('):-len(')')])['body']
+            page.body = json.loads(text)['body']
         return page
 
     def _page_to_dict(self, page):
