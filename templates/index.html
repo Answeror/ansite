@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import post_date %}
+{% from 'macros.html' import date %}
 
 {% block content %}
     <article>
         <ol class='index'>
-            {% for page in pages | sort(attribute='date', reverse=True) %}
+            {% for page in pages | sort(attribute='mtime', reverse=True) %}
             <li>
                 <h1><a href='{{ url_for('page', path=page.path) }}'>{{ page.title }}</a></h1>
-                <p>{{ post_date(page) }}</p>
+                <p><small><span title='post date'>{{ date(page.ctime) }}<span> & <span title='last change date'>{{ date(page.mtime) }}</span></small></p>
             </li>
             {% else %}
             <li>No stuff.</li>

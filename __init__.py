@@ -102,7 +102,9 @@ class Site(object):
         )
         self.app = app
         app.config.from_object(__name__)
-        pages = FlatPages(app)
+
+        from .page import Pages
+        pages = Pages(FlatPages(app), self.make_hist)
 
         import git
         self.git = git.Git(os.getcwd())

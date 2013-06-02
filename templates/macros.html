@@ -10,3 +10,5 @@
 
 {%- macro changelog_title(lang) %}
 {%- endmacro %}
+
+{%- macro date(time) %}<time class="date" datetime="{{ time }}">{{ time.strftime('%Y-%m-%d') }}</time>{%- endmacro %}
