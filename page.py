@@ -23,13 +23,25 @@ class Page(object):
     def meta(self):
         return self.impl.meta
 
+    @meta.setter
+    def meta(self, value):
+        self.impl.meta = value
+
     @property
     def body(self):
         return self.impl.body
 
+    @body.setter
+    def body(self, value):
+        self.impl.body = value
+
     @property
     def path(self):
         return self.impl.path
+
+    @path.setter
+    def path(self, value):
+        self.impl.path = value
 
     def __getitem__(self, key):
         return self.impl[key]
