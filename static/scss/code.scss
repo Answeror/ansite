@@ -10,18 +10,29 @@
         -moz-border-radius: 0.2em;
         -webkit-border-radius: 0.2em;
     }
+    pre {
+        white-space: pre-wrap;
+        padding: 1em;
+        line-height: 1em;
+        code {
+            background-color: inherit;
+            padding: 0;
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
+        }
+    }
 }
 
-kbd {
-    padding: 0 0.2em;
-    border-width: 1px;
-    border-style: solid;
-    -moz-border-radius: 0.2em;
-    -webkit-border-radius: 0.2em;
-}
+/*kbd {*/
+    /*padding: 0 0.2em;*/
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*-moz-border-radius: 0.2em;*/
+    /*-webkit-border-radius: 0.2em;*/
+/*}*/
 
-.codehilite pre {
-    white-space:pre-wrap;
-    padding:1em;
-    line-height: 1em;
-}
+/*.codehilite pre {*/
+    /*white-space:pre-wrap;*/
+    /*padding:1em;*/
+    /*line-height: 1em;*/
+/*}*/

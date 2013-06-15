@@ -14,6 +14,7 @@ def render_markdown(text):
     try:
         import pygments
     except ImportError:
+        logging.info('no pygments')
         extensions = []
     else:
         extensions = ['codehilite']
@@ -25,6 +26,9 @@ def render_markdown(text):
 
     import mdx_mathjax as mathjax
     extensions.append(mathjax.makeExtension())
+
+    import mdx_tikz as tikz
+    extensions.append(tikz.makeExtension())
 
     return markdown.markdown(render_jinja2(text), extensions)
 
