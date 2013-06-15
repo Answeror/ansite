@@ -1,0 +1,17 @@
+Flask==0.9
+Flask-FlatPages==0.5
+Frozen-Flask==0.10
+GitPython==0.3.2.RC1
+Jinja2==2.6
+Markdown==2.3.1
+PyYAML==3.10
+Pygments==1.6
+Werkzeug==0.8.3
+async==0.6.1
+cssselect==0.8
+gitdb==0.5.4
+lxml==3.0.2
+pyScss==1.1.5
+pyquery==1.2.4
+shpaml==1.00b
+smmap==0.8.2
