@@ -19,9 +19,28 @@
 \definecolor{solarizedCyan}{HTML}{2AA198}
 \definecolor{solarizedGreen}{HTML}{859900}
 
-\usepackage{tikz}
-\tikzstyle{every picture}=[color=solarizedBase0]
+\colorlet{solarizedAccent}{solarizedYellow}
 
-\begin{document}\large
+\usepackage{tikz}
+\usetikzlibrary{
+    arrows,
+    shapes,
+    patterns,
+    snakes,
+    automata,
+    topaths,
+    shadows,
+    positioning,
+    shadings,
+    fit,
+    backgrounds
+}
+\tikzstyle{every picture}=[color=solarizedBase0]
+\colorlet{accent}{solarizedAccent}
+
+\begin{document}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
 %s
 \end{document}

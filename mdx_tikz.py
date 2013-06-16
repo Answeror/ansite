@@ -48,10 +48,18 @@ def collapse_groups(r):
             collapse_groups(x)
 
 
+def scale_attr(attr, scale):
+    return str(scale * float(attr[:-2])) + attr[-2:]
+
+
 def process(r):
     default_prefix(r, 'http://www.w3.org/2000/svg')
     strip_whitespace(r)
-    collapse_groups(r)
+    # cause color error
+    #collapse_groups(r)
+    scale = 2
+    r.attrib['width'] = scale_attr(r.attrib['width'], scale)
+    r.attrib['height'] = scale_attr(r.attrib['height'], scale)
 
 
 class TikzBlockProcessor(BlockProcessor):
@@ -69,11 +77,11 @@ class TikzBlockProcessor(BlockProcessor):
             tmp = mkdtemp()
             tex = path.join(tmp, 'job.tex')
 
-            with open(os.path.join(ROOT, 'tikz.tex.in'), 'r') as f:
+            with open(os.path.join(ROOT, 'tikz.tex.in'), 'rb') as f:
                 template = f.read()
 
-            with open(tex, 'w') as f:
-                f.write(template % tikz)
+            with open(tex, 'wb') as f:
+                f.write(template % tikz.encode('utf-8'))
 
             # Run Tex4Ht, creates SVG file(s).
             logging.info('before call tex4ht')
@@ -81,7 +89,7 @@ class TikzBlockProcessor(BlockProcessor):
             os.chdir(tmp)
             try:
                 with open(os.path.join(tmp, 'log'), 'w') as f:
-                    check_call('mk4ht htlatex job html', shell=True, stdout=f, stderr=f)
+                    check_call(['mk4ht', 'htlatex', 'job', 'xhtml'], shell=True, stdout=f, stderr=f)
             finally:
                 os.chdir(cwd)
             logging.info('tex4ht done')
