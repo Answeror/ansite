@@ -76,12 +76,16 @@
 
             img {
                 display: block;
+                max-width: 640px;
+                max-height: 100%;
                 margin-left: auto;
                 margin-right: auto;
                 /* http://themes.elmastudio.de/kerikeri-dark/2012/02/12/image-post-with-image-border/ */
-                padding: 5px;
-                background: #2A2F31;
-                border: 1px solid #13171A;
+                &.border {
+                    padding: 5px;
+                    background: #2A2F31;
+                    border: 1px solid #13171A;
+                }
             }
 
             svg {

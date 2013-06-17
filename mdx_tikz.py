@@ -19,6 +19,17 @@ import logging
 ROOT = os.path.dirname(__file__)
 
 
+def _randomize_id(path):
+    import re
+    from uuid import uuid4
+    with open(path, 'rb') as f:
+        s = f.read()
+    for id in re.findall(r'pgf[a-z]+\d+', s):
+        s = s.replace(id, bytes(uuid4()))
+    with open(path, 'wb') as f:
+        f.write(s)
+
+
 def default_prefix(r, uri):
     '''Remove the prefix for namespace `uri`.'''
     r.set('xmlns', uri)
@@ -96,6 +107,7 @@ class TikzBlockProcessor(BlockProcessor):
             # SVGs:
             results = list(glob.glob(path.join(tmp, '*.svg')))
             if results:
+                _randomize_id(results[0])
                 self.cache[tikz] = etree.parse(results[0])
             # Cleanup
             rmtree(tmp)
