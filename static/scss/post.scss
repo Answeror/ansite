@@ -106,7 +106,7 @@
             ol {
                 counter-reset: li;
                 list-style: decimal;
-                li {
+                & > li {
                     position:relative; /* Create a positioning context */
                     margin-left: 1.5em;
                     &:before {
@@ -123,7 +123,7 @@
             }
             ul {
                 list-style: circle;
-                li {
+                & > li {
                     position: relative;
                     margin-left: 1.5em;
                     &:before {
