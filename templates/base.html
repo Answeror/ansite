@@ -5,6 +5,7 @@
         <title>{% block title %}{{ title }}{% endblock title %}</title>
         <link rel='stylesheet' type='text/css' href='http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css'>
         <link rel='stylesheet' type='text/css' href='./style.css'>
+        <link href="/static/js/jquery.mCustomScrollbar.css" rel="stylesheet">
         <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
         <script src='/static/js/layout.js'></script>
         <!--<script src='/static/js/jquery.jsonp-2.4.0.min.js'></script>-->
@@ -21,12 +22,28 @@
                 </ul>
             </div>
         </header>
-        <div id='container'>
-        {% block content %}
-            <p>something default</p>
-        {% endblock content %}
+        <div id="body">
+            <div id='container'>
+            {% block content %}
+                <p>something default</p>
+            {% endblock content %}
+            </div>
         </div>
         <footer>
+            <script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script>
+                (function($){
+                    $(window).load(function(){
+                        $("#body").mCustomScrollbar({
+                            autoHideScrollbar:true
+                        });
+                        $("pre").mCustomScrollbar({
+                            autoHideScrollbar:true,
+                            horizontalScroll:true
+                        });
+                    });
+                })(jQuery);
+            </script>
             <script type='text/javascript'>
 
                 var _gaq = _gaq || [];
