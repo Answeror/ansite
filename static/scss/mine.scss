@@ -10,7 +10,6 @@ a {
 @import "width";
 
 html {
-    height: 100%;
 }
 
 body {
@@ -19,21 +18,15 @@ body {
     font-family: georgia,times,serif;
     margin: 0 auto;
     padding: 0;
-    height: 100%;
     position: relative;
 }
 
 #body {
     position: absolute;
-    overflow: hidden;
     top: 42px;
-    bottom: 0;
-    left: -200px;
-    right: -(13+30)px;
 }
 
 #container {
-    margin: 0 13px 0 200px;
     & > article > *:first-child {
         margin-top: 42px;
     }
